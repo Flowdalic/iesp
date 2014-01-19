@@ -1,0 +1,24 @@
+apply plugin: 'android-library'
+
+android {
+    compileSdkVersion 15
+    buildToolsVersion "19.1.0"
+
+    defaultConfig {
+		versionCode 1
+		versionName version
+		minSdkVersion 1
+    }
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			pom {
+				project {
+					packaging 'aar'
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,36 @@
+apply plugin: 'java'
+
+def getAndroidRuntimeJar() {
+	def androidHome = new File("$System.env.ANDROID_HOME")
+	if (!androidHome.isDirectory()) throw new Exception("ANDROID_HOME not found or set")
+	new File("$androidHome/platforms/android-8/android.jar")
+}
+
+compileJava {
+	options.bootClasspath = getAndroidRuntimeJar()
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier = 'sources'
+	from sourceSets.main.allSource
+}
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	classifier = 'javadoc'
+	from javadoc.destinationDir
+}
+artifacts {
+	archives sourcesJar
+	archives javadocJar
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			pom {
+				project {
+					packaging 'jar'
+				}
+			}
+		}
+	}
+}
