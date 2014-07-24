@@ -34,3 +34,16 @@ uploadArchives {
 		}
 	}
 }
+
+jar {
+	manifest {
+		attributes(
+		'Implementation-Version': version,
+		'Implementation-GitRevision': project.gitCommit,
+		'Built-Date': project.buildDate,
+		'Built-JDK': System.getProperty('java.version'),
+		'Built-Gradle': gradle.gradleVersion,
+		'Built-By': System.getProperty('user.name')
+		)
+	}
+}

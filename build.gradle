@@ -12,6 +12,8 @@ allprojects {
 	ext {
 		shortVersion = '0.0.1'
 		isSnapshot = true
+		gitCommit = getGitCommit()
+		buildDate = getDatestamp()
 		sonatypeCredentialsAvailable = project.hasProperty('sonatypeUsername') && project.hasProperty('sonatypePassword')
 		isReleaseVersion = !isSnapshot
 		signingRequired = isReleaseVersion
@@ -95,4 +97,30 @@ gradle.taskGraph.whenReady { taskGraph ->
 
 		console.printf '\nThanks.\n\n'
 	}
+}
+
+import org.ajoberstar.grgit.*
+
+def getGitCommit() {
+	def dotGit = new File("$projectDir/.git")
+	if (!dotGit.isDirectory()) return 'non-git build'
+
+	def cmd = 'git describe --tags --dirty=+'
+	def proc = cmd.execute()
+	def gitCommit = proc.text.trim()
+	if (gitCommit.isEmpty()) {
+		cmd = 'git rev-parse HEAD'
+		proc = cmd.execute()
+		gitCommit = proc.text.trim()
+	}
+	assert !gitCommit.isEmpty()
+	gitCommit
+}
+
+// Returns only the date in yyyy-MM-dd format, as otherwise, with
+// hh:mm:ss information, the manifest files would change with every
+// build, causing unnecessary rebuilds.
+def getDatestamp() {
+	def date = new Date()
+	return date.format('yyyy-MM-dd')
 }
