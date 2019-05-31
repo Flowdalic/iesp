@@ -11,7 +11,7 @@ buildscript {
 
 allprojects {
 	ext {
-		shortVersion = '0.0.1'
+		shortVersion = '0.0.2'
 		isSnapshot = true
 		gitCommit = getGitCommit()
 		buildDate = getDatestamp()

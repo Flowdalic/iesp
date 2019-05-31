@@ -10,9 +10,12 @@ android {
     compileSdkVersion 24
 
     defaultConfig {
-		versionCode 1
+		versionCode 2
 		versionName version
-		minSdkVersion 1
+		// Set to 4 because otherwhise the WRITE_EXTERNAL_STORAGE and
+		// READ_PHONE_STATE are implictly requested.
+		// See https://developer.android.com/studio/build/manifest-merge#implicit_system_permissions
+		minSdkVersion 4
     }
 }
 
