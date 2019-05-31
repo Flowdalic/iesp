@@ -11,8 +11,8 @@ buildscript {
 
 allprojects {
 	ext {
-		shortVersion = '0.0.2'
-		isSnapshot = false
+		shortVersion = '0.0.3'
+		isSnapshot = true
 		gitCommit = getGitCommit()
 		buildDate = getDatestamp()
 		sonatypeCredentialsAvailable = project.hasProperty('sonatypeUsername') && project.hasProperty('sonatypePassword')
