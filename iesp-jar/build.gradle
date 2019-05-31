@@ -3,11 +3,11 @@ apply plugin: 'java'
 def getAndroidRuntimeJar() {
 	def androidHome = new File("$System.env.ANDROID_HOME")
 	if (!androidHome.isDirectory()) throw new Exception("ANDROID_HOME not found or set")
-	new File("$androidHome/platforms/android-8/android.jar")
+	new File("$androidHome/platforms/android-24/android.jar")
 }
 
 compileJava {
-	options.bootClasspath = getAndroidRuntimeJar()
+	options.bootstrapClasspath = files(getAndroidRuntimeJar())
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

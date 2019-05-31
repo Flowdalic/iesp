@@ -60,7 +60,7 @@ public class ImportExportSharedPreferences {
 	 * StringSets.
 	 * 
 	 * @param sharedPreferences
-	 * @param outDirectory
+	 * @param writer
 	 * @param doNotExport
 	 *            a set of keys that should not get exported (passwords, etc.),
 	 *            may be null

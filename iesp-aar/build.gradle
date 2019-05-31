@@ -1,8 +1,13 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
+
+repositories {
+	mavenCentral()
+	google()
+	jcenter()
+}
 
 android {
-    compileSdkVersion 15
-    buildToolsVersion "19.1.0"
+    compileSdkVersion 24
 
     defaultConfig {
 		versionCode 1
